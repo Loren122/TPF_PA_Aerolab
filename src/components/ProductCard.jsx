@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { redeemProduct } from "../services/api";
+import { UserContext } from "../context/UserContext";
 
 
 export const ProductCard = ({ product, onRedeem }) => {
 
     const { img, name, category, cost } = product;
 
+    const { points, setPoints } = useContext(UserContext);
     const [isHovered, setIsHovered] = useState(false);
     const [isRedeeming, setIsRedeeming] = useState(false);
     const [error, setError] = useState(null);
@@ -29,17 +31,25 @@ export const ProductCard = ({ product, onRedeem }) => {
         }
     };
 
+    const enoughPoints = points >= cost;
+
     return (
         <div
             className="product-card"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <img
-                src={isHovered ? "../src/assets/icons/buy-white.svg" : "../src/assets/icons/buy-blue.svg"}
-                alt="Comprar"
-                className="buy-icon"
-            />
+            {enoughPoints ? (
+                <img
+                    src={isHovered ? "../src/assets/icons/buy-white.svg" : "../src/assets/icons/buy-blue.svg"}
+                    alt="Comprar"
+                    className="buy-icon"
+                />
+
+            ): (
+                <p className="points-needed-message">You need {cost - points}</p>
+            )}
+
             <img src={img.url} alt={name} className="product-image" />
             <p className="product-category">{category}</p>
             <h4>{name}</h4>
@@ -54,8 +64,9 @@ export const ProductCard = ({ product, onRedeem }) => {
                     onClick={() => handleRedeem(product._id)}
                     disabled={isRedeeming}
                     >
-                        Redeem now
+                        {isRedeeming ? 'Redeeming...' : 'Redeem now'}
                     </button>
+                    {error && <p className="error-message">{error}</p>}
                 </div>
             )}
         </div>

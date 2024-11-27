@@ -1,5 +1,5 @@
 import { UserContext } from "../context/UserContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
