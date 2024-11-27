@@ -25,13 +25,6 @@ export const UserProvider = ({ children }) => {
             setName(newName);
         };
 
-    //     const addUserPoints = async (amount) => {
-    //     const updatedPoints = await addPoints(amount);
-    //     if (updatedPoints !== null) {
-    //         setPoints(updatedPoints);
-    //     }
-    // };
-
         return (
           <UserContext.Provider value = {{ user, points, setPoints, updateName, name }}>
             {children}

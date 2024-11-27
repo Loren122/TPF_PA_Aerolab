@@ -1,19 +1,33 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
-import { updateUserHistory } from "../services/api";
+import { useState } from "react";
+import { redeemProduct } from "../services/api";
 
 
 export const ProductCard = ({ product, onRedeem }) => {
 
     const { img, name, category, cost } = product;
 
-    const { points, setPoints } = useContext(UserContext);
     const [isHovered, setIsHovered] = useState(false);
     const [isRedeeming, setIsRedeeming] = useState(false);
     const [error, setError] = useState(null);
 
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
+
+    const handleRedeem = async (productId) => {
+        try {
+            setIsRedeeming(true);
+            await redeemProduct(productId);
+            setIsRedeeming(false);
+
+            if (onRedeem) {
+                onRedeem(productId);
+            }
+        } catch (error) {
+            console.error("Error al actualizar el historial:", error);
+            setError("Hubo un problema al procesar tu redención. Inténtalo de nuevo más tarde.");
+            setIsRedeeming(false);
+        }
+    };
 
     return (
         <div
@@ -37,7 +51,8 @@ export const ProductCard = ({ product, onRedeem }) => {
                     </div>
                     <button
                     className="redeem-button"
-                    onClick={() => onRedeem(product._id)}
+                    onClick={() => handleRedeem(product._id)}
+                    disabled={isRedeeming}
                     >
                         Redeem now
                     </button>

@@ -38,13 +38,13 @@ export const fetchProducts = async () => {
 
         if (!response.ok) {
             console.error("Error fetching products:", response.status);
-            return []; // Retorna un array vacío si hay un error
+            return [];
         }
         const data = await response.json();
         return data;
     } catch (error) {
         console.error("Fetch error:", error);
-        return []; // Retorna un array vacío si hay un error
+        return [];
     }
 };
 
@@ -66,11 +66,11 @@ export const fetchUserHistory = async () => {
     }
 };
 
-export const updateUserHistory = async (productId) => {
-  const response = await fetch(`${API_URL}/user/history`, {
+export const redeemProduct = async (productId) => {
+  const response = await fetch(`${API_URL}/redeem`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ productId }), // Enviar el ID del producto en el cuerpo
+    body: JSON.stringify({ productId }),
   });
 
   if (!response.ok) {
