@@ -270,10 +270,31 @@ span.points-cost {
   opacity: 1;
 }
 
+.points-needed-message {
+  color: white;
+  text-align: center;
+  background-color: #616161;
+  padding: 5px 10px;
+  border-radius: 100px;
+  opacity: 0.8;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.points-needed-message img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
 .redeem-button {
   position: absolute;
   transform: translateX(-50%);
-  /* Ajuste para centrar el botón */
   margin-top: 50px;
   background-color: #ffffff;
   color: #616161;

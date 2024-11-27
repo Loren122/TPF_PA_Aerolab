@@ -1,4 +1,4 @@
-import { fetchUserHistory, updateUserHistory } from '../services/api.js';
+import { fetchUserHistory } from '../services/api.js';
 import { useState, useEffect } from 'react';
 
 export const UserHistory = () => {

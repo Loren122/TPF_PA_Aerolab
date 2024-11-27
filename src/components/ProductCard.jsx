@@ -47,7 +47,7 @@ export const ProductCard = ({ product, onRedeem }) => {
                 />
 
             ): (
-                <p className="points-needed-message">You need {cost - points}</p>
+                <p className="points-needed-message">You need {cost - points} <img src="../src/assets/icons/coin.svg" alt="" /></p>
             )}
 
             <img src={img.url} alt={name} className="product-image" />
