@@ -7,23 +7,6 @@ const headers = {
     'Authorization': `Bearer ${API_KEY}`,
 };
 
-// const fetchApi = async (endpoint, options) => {
-//     try {
-//         const response = await fetch(`${API_URL}/${endpoint}`, {
-//             headers,
-//             ...options
-//         });
-//         if (!response.ok) {
-//             throw new Error(`Error ${response.status}: ${response.statusText}`);
-//     }
-
-//     return await response.json();
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         throw error;
-//     }
-// };
-
 export const fetchUserData = async () => {
     const response = await fetch(`${API_URL}/user/me`, { headers });
     return response.json();
@@ -38,13 +21,13 @@ export const fetchProducts = async () => {
 
         if (!response.ok) {
             console.error("Error fetching products:", response.status);
-            return []; // Retorna un array vacío si hay un error
+            return [];
         }
         const data = await response.json();
         return data;
     } catch (error) {
         console.error("Fetch error:", error);
-        return []; // Retorna un array vacío si hay un error
+        return [];
     }
 };
 
@@ -66,16 +49,21 @@ export const fetchUserHistory = async () => {
     }
 };
 
-export const updateUserHistory = async (productId) => {
-  const response = await fetch(`${API_URL}/user/history`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ productId }),
-  });
+export const redeemProduct = async (productId) => {
+    try {
+        const response = await fetch(`${API_URL}/redeem`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ productId }),
+        });
 
-  if (!response.ok) {
-    throw new Error(`Failed to update user history: ${response.statusText}`);
-  }
+        if (!response.ok) {
+            throw new Error(`Failed to update user history: ${response.statusText}`);
+        }
 
-  return await response.json();
+        return await response.json();
+    } catch (error) {
+         console.error("Error al redimir el producto:", error);
+        throw new Error("Hubo un problema al procesar tu redención. Inténtalo de nuevo más tarde.");
+    }
 };

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
+import { redeemProduct } from "../services/api";
 import { UserContext } from "../context/UserContext";
-import { updateUserHistory } from "../services/api";
 
 
 export const ProductCard = ({ product, onRedeem }) => {
@@ -17,13 +17,21 @@ export const ProductCard = ({ product, onRedeem }) => {
 
     const handleRedeem = async (productId) => {
         try {
-        const newProduct = await updateUserHistory(productId);
-        setHistory((prevHistory) => [...prevHistory, newProduct]);
+            setIsRedeeming(true);
+            await redeemProduct(productId);
+            setIsRedeeming(false);
+
+            if (onRedeem) {
+                onRedeem(productId);
+            }
         } catch (error) {
-        console.error('Error al agregar el producto al historial:', error);
-        setError(error.message || 'Ocurrió un error al agregar el producto');
+            console.error("Error al actualizar el historial:", error);
+            setError("Hubo un problema al procesar tu redención. Inténtalo de nuevo más tarde.");
+            setIsRedeeming(false);
         }
     };
+
+    const enoughPoints = points >= cost;
 
     return (
         <div
@@ -31,11 +39,17 @@ export const ProductCard = ({ product, onRedeem }) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <img
-                src={isHovered ? "../src/assets/icons/buy-white.svg" : "../src/assets/icons/buy-blue.svg"}
-                alt="Comprar"
-                className="buy-icon"
-            />
+            {enoughPoints ? (
+                <img
+                    src={isHovered ? "../src/assets/icons/buy-white.svg" : "../src/assets/icons/buy-blue.svg"}
+                    alt="Comprar"
+                    className="buy-icon"
+                />
+
+            ): (
+                <p className="points-needed-message">You need {cost - points}</p>
+            )}
+
             <img src={img.url} alt={name} className="product-image" />
             <p className="product-category">{category}</p>
             <h4>{name}</h4>
@@ -48,9 +62,11 @@ export const ProductCard = ({ product, onRedeem }) => {
                     <button
                     className="redeem-button"
                     onClick={() => handleRedeem(product._id)}
+                    disabled={isRedeeming}
                     >
-                        Redeem now
+                        {isRedeeming ? 'Redeeming...' : 'Redeem now'}
                     </button>
+                    {error && <p className="error-message">{error}</p>}
                 </div>
             )}
         </div>

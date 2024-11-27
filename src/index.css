@@ -287,6 +287,10 @@ span.points-cost {
   z-index: 1;
 }
 
+.redeem-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .buy-icon {
   position: absolute;
   top: 10px;
