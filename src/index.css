@@ -1,0 +1,336 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #f9f9f9;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.header-logo {
+  display: flex;
+  position: left;
+  background-color: transparent;
+  border: none;
+  margin-left: 7px;
+}
+
+.header-logo img {
+  width: 50px;
+  height: 70px;
+}
+
+.header-logo :hover {
+  cursor: pointer;
+}
+
+.header-user-info {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.user-history {
+  display: flex;
+  flex-direction: column;
+  /* Asegura que los elementos hijos se apilen verticalmente */
+  align-items: flex-start;
+  /* Alinea los elementos al inicio del contenedor */
+  padding: 16px;
+  /* Espaciado interno para darle margen */
+}
+
+.user-history h1 {
+  margin-bottom: 16px;
+  /* Espaciado entre el título y los demás elementos */
+  width: 100%;
+  /* Asegura que el título ocupe todo el ancho del contenedor */
+  text-align: left;
+  /* Opcional: alinear el texto al lado izquierdo */
+}
+
+.points-container {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: #333;
+}
+
+.header-user-info {
+  background-color: rgba(0, 0, 0, 0.095);
+  border-radius: 95px;
+  padding: 1px 10px;
+}
+
+.points {
+  font-size: 24px;
+  color: #616161;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.coin-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+
+}
+
+.header-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+}
+
+.header-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  position: absolute;
+}
+
+.header-title {
+  position: absolute;
+  bottom: 10px;
+  left: 100px;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 50px;
+  margin: 20px;
+  justify-items: center;
+}
+
+.product-image {
+  width: 161px;
+  height: 161px;
+  object-fit: contain;
+  object-position: center;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.20);
+  margin: 30px;
+}
+
+p.product-category {
+  font-size: 16px;
+  color: #a3a3a3;
+  letter-spacing: -0.04px;
+  text-align: left;
+  display: flex;
+  margin: 2px;
+}
+
+h4 {
+  font-size: 18px;
+  color: #616161;
+  text-align: left;
+  margin: 2px;
+}
+
+.header-user-name {
+  font-size: 24px;
+}
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} 
+.points-info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.points-info .coin-icon {
+  width: 30px;
+  height: 30px;
+}
+
+span.points-cost {
+  font-size: 36px;
+  color: #ffffff;
+}
+/* !!! */
+.redeem-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* !!! */
+.product-card {
+  position: relative;
+  background: #ffffff;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.10);
+  width: 276px;
+  height: 276px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 212, 250, 0.85);
+  opacity: 0;
+  z-index: 0; /* Poner atras de los elementos de la tarjeta */
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-card:hover .product-info {
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.product-card:hover .points-info {
+  opacity: 1;
+}
+
+.product-card:hover .redeem-button {
+  opacity: 1;
+}
+
+.redeem-button {
+  position: absolute;
+  transform: translateX(-50%);
+  /* Ajuste para centrar el botón */
+  margin-top: 50px;
+  background-color: #ffffff;
+  color: #616161;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  opacity: 0;
+  width: 228px;
+  height: 42px;
+  z-index: 1;
+}
+
+.buy-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  /* Ajusta el tamaño */
+  height: 40px;
+  /* Ajusta el tamaño */
+  border-radius: 50%;
+  /* Para hacerla redonda */
+  opacity: 0.8;
+  /* Translucida para darle un efecto sutil */
+  transition: opacity 0.3s ease;
+  /* Transición suave para el cambio de imagen */
+  z-index: 1;
+  /* Para que esté encima de otros elementos */
+}
+
+.product-card:hover .buy-icon {
+  opacity: 1;
+  /* Hace que la imagen de compra sea completamente visible cuando se hace hover */
+}
+
+.product-card:hover .buy-icon {
+  /* Esto es opcional si quieres hacer algo más en el hover */
+  opacity: 1;
+}
+
+.header-user-name {
+  font-size: 24px;
+  color: #616161;
+  background-color: transparent;
+  border: none;
+}
+
+.header-user-name:hover {
+  cursor: pointer;
+}
+
+.user-history {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  left: 100px;
+  color: #616161;
+}
