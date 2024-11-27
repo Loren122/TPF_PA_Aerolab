@@ -1,10 +1,9 @@
-import { fetchUserHistory } from '../services/api.js';
+import { fetchUserHistory, updateUserHistory } from '../services/api.js';
 import { useState, useEffect } from 'react';
 
 export const UserHistory = () => {
 
   const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -21,7 +20,6 @@ export const UserHistory = () => {
 
       getHistory();
   }, []);
-
 
   return (
     <div className="user-history">

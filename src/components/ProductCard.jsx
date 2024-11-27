@@ -15,6 +15,16 @@ export const ProductCard = ({ product, onRedeem }) => {
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
 
+    const handleRedeem = async (productId) => {
+        try {
+        const newProduct = await updateUserHistory(productId);
+        setHistory((prevHistory) => [...prevHistory, newProduct]);
+        } catch (error) {
+        console.error('Error al agregar el producto al historial:', error);
+        setError(error.message || 'Ocurrió un error al agregar el producto');
+        }
+    };
+
     return (
         <div
             className="product-card"
@@ -37,7 +47,7 @@ export const ProductCard = ({ product, onRedeem }) => {
                     </div>
                     <button
                     className="redeem-button"
-                    onClick={() => onRedeem(product._id)}
+                    onClick={() => handleRedeem(product._id)}
                     >
                         Redeem now
                     </button>

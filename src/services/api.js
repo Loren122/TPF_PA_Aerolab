@@ -70,7 +70,7 @@ export const updateUserHistory = async (productId) => {
   const response = await fetch(`${API_URL}/user/history`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ productId }), // Enviar el ID del producto en el cuerpo
+    body: JSON.stringify({ productId }),
   });
 
   if (!response.ok) {
