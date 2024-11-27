@@ -10,7 +10,7 @@ export const ProductList = () => {
     useEffect(() => {
         const loadProducts = async () => {
             const data = await fetchProducts();
-            setProducts(Array.isArray(data) ? data : []); // Verificación de array
+            setProducts(Array.isArray(data) ? data : []);
         };
 
         loadProducts();

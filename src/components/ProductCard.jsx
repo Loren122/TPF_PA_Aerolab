@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { redeemProduct } from "../services/api";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const ProductCard = ({ product, onRedeem }) => {
@@ -15,7 +16,14 @@ export const ProductCard = ({ product, onRedeem }) => {
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
 
-    const handleRedeem = async (productId) => {
+    const navigate = useNavigate();
+
+    const handleRedeemClick = () => {
+        navigate(`/product/${product._id}`)
+    }
+
+    const handleRedeem = async (e, productId) => {
+        e.stopPropagation();
         try {
             setIsRedeeming(true);
             await redeemProduct(productId);
@@ -38,6 +46,8 @@ export const ProductCard = ({ product, onRedeem }) => {
             className="product-card"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            role="button"
+            onClick={handleRedeemClick}
         >
             {enoughPoints ? (
                 <img
@@ -61,7 +71,7 @@ export const ProductCard = ({ product, onRedeem }) => {
                     </div>
                     <button
                     className="redeem-button"
-                    onClick={() => handleRedeem(product._id)}
+                    onClick={(e) => {handleRedeem(e, product._id)}}
                     disabled={isRedeeming}
                     >
                         {isRedeeming ? 'Redeeming...' : 'Redeem now'}

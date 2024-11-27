@@ -63,7 +63,7 @@ export const redeemProduct = async (productId) => {
 
         return await response.json();
     } catch (error) {
-         console.error("Error al redimir el producto:", error);
-        throw new Error("Hubo un problema al procesar tu redención. Inténtalo de nuevo más tarde.");
+         console.error("Error to redeem product:", error);
+        throw new Error("there was an error redeeming the product.");
     }
 };

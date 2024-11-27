@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 export const UserHistory = () => {
 
   const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,6 +21,10 @@ export const UserHistory = () => {
 
       getHistory();
   }, []);
+
+  if (loading) {
+      return <p>Loading...</p>;
+  }
 
   return (
     <div className="user-history">

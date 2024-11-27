@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path= "/user/history" element={<UserHistory />} />
-          {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+          <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
       </Router>
     </UserProvider>
